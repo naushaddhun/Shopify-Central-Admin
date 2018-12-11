@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src = "https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src = "https://cdn.datatables.net/autofill/2.3.0/css/autoFill.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/autofill/2.3.0/js/dataTables.autoFill.min.js"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src = "https://cdn.datatables.net/keytable/2.4.0/css/keyTable.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/keytable/2.4.0/js/dataTables.keyTable.min.js"></script>
+    <script src = "https://cdn.datatables.net/select/1.2.6/css/select.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/select/1.2.6/js/dataTables.select.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      html, body { padding: 0; margin: 0; }
+      body {
+        font-family: "Trebuchet MS", "ProximaNovaLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #f2f7fa;
+      }
+      .topnav {
+        float: top;
+        /* overflow: inherit; */
+        background-color: #333;
+        margin-left: 160px;
+        width: auto;
+      }
+
+
+      .topnav span {
+        float: left;
+        align-content: center;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: inherit;
+        font-size: 17px;
+      }
+      .topnav p {
+        float: center;
+        align-content: center;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: underline;
+        font-size: 30px;
+      }
+      h1 {
+        font-weight: 300;
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+      .subhead {
+        font-size: 17px;
+        line-height: 32px;
+        font-weight: 300;
+        color: #969A9C;
+      }
+      input {
+        width: 300px;
+        height: 50px;
+        padding: 10px;
+        border: 1px solid #479CCf;
+        color: #575757;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        border-radius: 4px 0 0 4px;
+        font-size: 18px;
+        float: left;
+        visibility: hidden;
+      }
+      table{
+        border: 1;
+        cellpadding: 20px;
+        cellspacing: 20px;
+        background-color: inherit;
+        text-align: center;
+      }
+      #table_next{
+        padding-left: 10px;
+      }
+      #table_previous{
+        padding-right: 10px;
+      }
+      #table_info {
+        padding: 20px;
+      }
+      #table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      #table td, #table th {
+          border: 1px solid #ddd;
+          padding: 8px;
+          font-size: 16px;
+      }
+      #table tr:nth-child(even){background-color: #f2f2f2;}
+      #table tr:hover {background-color: #ddd;}
+      #table th{
+        padding-top: 12px;
+        padding-bottom: 16px;
+        text-align: center;
+        background-color: #333;
+        color: white;
+      }
+      #printbtn {
+        text-align: end !important;
+      }
+      button {
+        color: #ffffff;
+        background-color: #333;
+        width: 100px;
+        height: 50px;
+        padding: 10px 20px 10px 20px;
+        box-sizing: border-box;
+        border: none;
+        text-shadow: 0 1px 0 #3188bc;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 4px 4px 4px 4px;
+      }
+      button:hover {
+        background-color: #479CCf;
+      }
+      form {
+        display: block;
+      }
+      #table_length {
+        text-align: left;
+        padding: 5px;
+          }
+      .container {
+        text-align: center;
+        margin-top: 100px;
+        padding: 20px;
+        color: #333;
+      }
+      .container__form {
+        width: 400px;
+        margin: auto;
+      }
+       .container__form2 {
+        width: 400px;
+        margin: 100px auto;
+      }
+      .sidenav {
+          height: 100%;
+          width: 160px;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: #111;
+          overflow-x: hidden;
+          padding-top: 20px;
+      }
+
+      .sidenav a {
+          padding: 6px 8px 6px 16px;
+          text-decoration: none;
+          font-size: 25px;
+          color: #818181;
+          display: block;
+      }
+
+      .sidenav a:hover {
+          color: #f1f1f1;
+      }
+
+      .main {
+          margin-left: 160px; /* Same as the width of the sidenav */
+          font-size: 28px; /* Increased text to enable scrolling */
+          padding: 0px 10px;
+      }
+
+      @media screen and (max-height: 450px) {
+          .topnav{padding-right: 15px; }
+          .sidenav {padding-top: 15px;}
+          .sidenav a {font-size: 18px;}
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="mySidenav" class="sidenav">
+
+    </div>
+    <div class="topnav">
+      <p style="margin-top: 0px;margin-bottom: 0px;"> Central Admin </p>
+    </div>
+      <center>
+      <div style="overflow-x: inherit;" class="main">
+        <div style = "text-align: left;padding-top: 2px">
+          <h3>Your Customers</h3>
+        </div>
+        <div id="mytable">
+
+        </div>
+        <div>
+
+        </div>
+      </div>
+    </center>
+      <script>
+      var customers =<%- (customers)%>
+      var shop =<%- JSON.stringify(shop)%>;
+      var side =   '<p></p><br><br><br> <a href="orders?shop=' + shop + '">Orders</a> <a href="products?shop=' + shop + '">Products</a> <a href="customers?shop=' + shop + '">Customers</a> <a href="reports?shop=' + shop + '">Reports</a><a href="shops">Change Shop</a>';
+      document.getElementById("mySidenav").innerHTML = side;
+      var mytable =   '<table border = "1" cellspacing="0" id="table"><thead><th>ID</th><th>Email</th><th>Name</th><th>Total Orders</th><th>Address</th></thead>'
+      for(var i=0; i<customers.length; i++){
+        mytable += '<tr>';
+        mytable += '<td>' + customers[i]['id'] + '</td>';
+        mytable +='<td>'+ customers[i]['email'] + '</td>';
+        mytable += '<td>' + customers[i]['first_name'] + ' ' + customers[i]['last_name'] + '</td>';
+        mytable += '<td>' + customers[i]['orders_count'] + '</td>';
+        mytable += '<td>' + customers[i]['default_address'].address1 + '<br>' + customers[i]['default_address'].city +  '<br>' + customers[i]['default_address'].province +  '<br>' + customers[i]['default_address'].country +  '<br>' + customers[i]['default_address'].zip +  '<br>' + customers[i]['default_address'].phone + '</td>';
+        mytable += '</tr>';
+      }
+      mytable += '</table>';
+      document.getElementById("mytable").innerHTML = mytable;
+      $(document).ready(function() {
+        $('#table').dataTable( {
+          searching: false,
+          //dom: 'Bfrtip',
+        buttons: [
+            'print', 'copy', 'csv', 'excel'
+        ],
+        paginate: true
+        } );
+      } );
+      </script>
+  </body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src = "https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src = "https://cdn.datatables.net/autofill/2.3.0/css/autoFill.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/autofill/2.3.0/js/dataTables.autoFill.min.js"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+    <script src = "https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src = "https://cdn.datatables.net/keytable/2.4.0/css/keyTable.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/keytable/2.4.0/js/dataTables.keyTable.min.js"></script>
+    <script src = "https://cdn.datatables.net/select/1.2.6/css/select.dataTables.min.css"></script>
+    <script src = "https://cdn.datatables.net/select/1.2.6/js/dataTables.select.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      html, body { padding: 0; margin: 0; }
+      body {
+        font-family: "Trebuchet MS", "ProximaNovaLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #f2f7fa;
+      }
+      .modal {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content */
+      .modal-content {
+          position: relative;
+          background-color: #fefefe;
+          margin: auto;
+          padding: 0;
+          border: 1px solid #888;
+          width: 80%;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+          -webkit-animation-name: animatetop;
+          -webkit-animation-duration: 0.4s;
+          animation-name: animatetop;
+          animation-duration: 0.4s
+      }
+
+      /* Add Animation */
+      @-webkit-keyframes animatetop {
+          from {top:-300px; opacity:0}
+          to {top:0; opacity:1}
+      }
+
+      @keyframes animatetop {
+          from {top:-300px; opacity:0}
+          to {top:0; opacity:1}
+      }
+
+      /* The Close Button */
+      .close {
+          color: white;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+          color: #000;
+          text-decoration: none;
+          cursor: pointer;
+      }
+
+      .modal-header {
+          padding: 2px 15px;
+          background-color: #333;
+          color: white;
+          height: 30px;
+      }
+
+      .modal-body {padding: 2px 16px;}
+
+      .modal-footer {
+          padding: 2px 15px;
+          padding-top: 15px;
+          background-color: #333;
+          color: white;
+          height: 30px;
+      }
+      .topnav {
+        float: top;
+        /* overflow: inherit; */
+        background-color: #333;
+        margin-left: 160px;
+        width: auto;
+      }
+
+
+      .topnav span {
+        float: left;
+        align-content: center;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: inherit;
+        font-size: 17px;
+      }
+      .topnav p {
+        float: center;
+        align-content: center;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: underline;
+        font-size: 30px;
+      }
+      h1 {
+        font-weight: 300;
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+      .subhead {
+        font-size: 17px;
+        line-height: 32px;
+        font-weight: 300;
+        color: #969A9C;
+      }
+      input {
+        width: 300px;
+        height: 50px;
+        padding: 10px;
+        border: 1px solid #333;
+        color: #333;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        border-radius: 4px 0 0 4px;
+        font-size: 18px;
+      }
+      table{
+        border: 1;
+        cellpadding: 20px;
+        cellspacing: 20px;
+        background-color: inherit;
+        text-align: center;
+      }
+      #table_next, #table2_next{
+        padding-left: 10px;
+      }
+      #table_previous, #table2_previous{
+        padding-right: 10px;
+      }
+      #table_info, #table2_info {
+        padding: 20px;
+      }
+      #table, #table2 {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        cursor: pointer;
+      }
+      #table td, #table th, #table2 td, #table2 th {
+          border: 1px solid #ddd;
+          padding: 8px;
+          font-size: 16px;
+      }
+      #table tr:nth-child(even){background-color: #f2f2f2;}
+      #table tr:hover {background-color: #ddd;}
+      #table2 tr:nth-child(even){background-color: #f2f2f2;}
+      #table2 tr:hover {background-color: #ddd;}
+      #table th, #table2 th{
+        padding-top: 12px;
+        padding-bottom: 16px;
+        text-align: center;
+        background-color: #333;
+        color: white;
+      }
+      #printbtn {
+        text-align: end !important;
+      }
+      button {
+        color: #ffffff;
+        background-color: #333;
+        width: 100px;
+        height: 50px;
+        padding: 10px 20px 10px 20px;
+        box-sizing: border-box;
+        border: none;
+        text-shadow: 0 1px 0 #3188bc;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 4px 4px 4px 4px;
+      }
+      button:hover {
+        background-color: #479CCf;
+      }
+      form {
+        display: block;
+      }
+      #table_length {
+        text-align: left;
+        padding: 5px;
+          }
+      .closeord{
+            text-align: center;
+            padding: 0px;
+            font-size: 14px;
+            margin-left: 1200px;
+            width: 100px;
+            height: 50px;
+          }
+      .container {
+        text-align: center;
+        margin-top: 100px;
+        padding: 20px;
+        color: #333;
+      }
+      .container__form {
+        width: 400px;
+        margin: auto;
+      }
+       .container__form2 {
+        width: 400px;
+        margin: 100px auto;
+      }
+      .sidenav {
+          height: 100%;
+          width: 160px;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: #111;
+          overflow-x: hidden;
+          padding-top: 20px;
+      }
+
+      .sidenav a {
+          padding: 6px 8px 6px 16px;
+          text-decoration: none;
+          font-size: 25px;
+          color: #818181;
+          display: block;
+      }
+
+      .sidenav a:hover {
+          color: #f1f1f1;
+      }
+
+      .main {
+          margin-left: 160px; /* Same as the width of the sidenav */
+          font-size: 28px; /* Increased text to enable scrolling */
+          padding: 0px 10px;
+      }
+
+      @media screen and (max-height: 450px) {
+          .topnav{padding-right: 15px; }
+          .sidenav {padding-top: 15px;}
+          .sidenav a {font-size: 18px;}
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mySidenav" class="sidenav">
+
+    </div>
+    <div class="topnav">
+      <p style="margin-top: 0px;margin-bottom: 0px;"> Central Admin </p>
+    </div>
+      <center>
+      <div style="overflow-x: inherit;" class="main">
+        <div style = "text-align: left;padding-top: 2px">
+          <h3>Order Summary</h3>
+          <button id="closeord" onclick=closeord() class="closeord" value="close_order">Close Orders</button>
+        </div>
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <span class="close">&times;</span>
+              </div>
+              <!-- close order button ka div -->
+              <div class="modal-body" id="o_c">
+
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
+
+          </div>
+
+          <div id="myModal2" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <span class="close">&times;</span>
+                </div>
+                <div id="ship">
+
+                </div>
+                <div class="modal-body" id="orderprods">
+
+
+                </div>
+                <div class="modal-footer">
+                </div>
+              </div>
+
+            </div>
+
+        <div id="mytable">
+          <button id="closeord" onclick=closeord() class="closeord" value="close_order">Close Orders</button>
+
+        </div>
+        <div>
+
+        </div>
+      </div>
+    </center>
+
+      <script>
+      var orders =<%- (orders)%>;
+      var shop =<%- JSON.stringify(shop)%>;
+      var side =   '<p></p><br><br><br> <a href="orders?shop=' + shop + '">Orders</a> <a href="products?shop=' + shop + '">Products</a> <a href="customers?shop=' + shop + '">Customers</a> <a href="reports?shop=' + shop + '">Reports</a><a href="shops">Change Shop</a>';
+      document.getElementById("mySidenav").innerHTML = side;
+      var mytable =   '<table border = "1" cellspacing="0" id="table"><thead><th>Name</th><th>Created At</th><th>Customer Locale</th><th>Financial Status</th><th>Fulfillment Status</th><th>Total Price</th><th>Options</th></thead>'
+    for(var i=0; i<orders.length; i++){
+      // console.log(orders[i], 'Hello There');
+      mytable += '<tr>';
+      mytable += '<td>' + orders[i]['name'] + '</td>';
+      mytable += '<td>' + orders[i]['created_at'] + '</td>';
+      mytable += '<td>' + orders[i]['customer_locale'] + '</td>';
+      mytable += '<td>' + orders[i]['financial_status'] + '</td>';
+      if(orders[i]['fulfillment_status']==null){
+        mytable += '<td>' + 'Unfulfilled' + '</td>';
+      }else {
+        mytable += '<td>' + 'Fulfilled' + '</td>';
+      }
+      mytable += '<td>' + '₹' + orders[i]['total_price'] + '</td>';
+      mytable += '<td>' + '<button type="button" value="view" id="btn" onclick=orderprods('+ orders[i]['id'] +')>' + 'View' + '</button>';
+    }
+    mytable += '</table>';
+    document.getElementById("mytable").innerHTML = mytable;
+      $(document).ready(function() {
+        $('#table').dataTable( {
+          searching: false,
+          //dom: 'Bfrtip',
+        buttons: [
+            'print', 'copy', 'csv', 'excel'
+        ],
+        paginate: true
+        } );
+      } );
+      function closeord() {
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("closeord");
+        var btn1 = document.getElementById("name");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        btn1.onclick = function () {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+      }
+      var close = '<p>Enter Order Name to Close Order: </p>';
+      close += '<input type="text" name="getname" >';
+      close += '<a href = "close_ord?shop=' + shop + '&name=' + JSON.stringify(document.getElementsByName("getname")) +'"><button id="name" type = "button">Ok</button> </a>';
+      document.getElementById('o_c').innerHTML = close;
+
+      function postclose() {
+        var order_name = document.getElementsByName('getname').innerHTML;
+        console.log(order_name);
+
+
+      }
+      function orderprods(order_id) {
+        var mytable1 =   '<table border = "1" cellspacing="0" id="table2"><thead><th>Name</th><th>Price</th></thead>';
+        for (var i = 0; i < orders.length; i++) {
+          if (orders[i]['id'] == order_id) {
+
+                console.log(order_id, 'Hello There');
+                console.log(orders[i].line_items);
+                for (var j = 0; j < orders[i].line_items.length; j++) {
+
+                mytable1 += '<tr>';
+                mytable1 += '<td>' + orders[i]['line_items'][j].name + '</td>';
+                mytable1 += '<td>' + orders[i]['line_items'][j].price + '</td>';
+                mytable1 += '</tr>';
+                }
+                mytable1 += '<th colspan=2>Shipping Details:</th>';
+                mytable1 += '<tr><td colspan=2 rowspan='+ orders[i].line_items.length +'>' + orders[i]['shipping_address'].name + '<br>' + orders[i]['shipping_address'].phone + '<br>' + orders[i]['shipping_address'].address1 + '<br>' + orders[i]['shipping_address'].city + '<br>' + 'Total Price: ' + orders[i].total_price + '</td></tr>';
+              }
+        }
+        mytable1 += '</table>';
+        document.getElementById("orderprods").innerHTML = mytable1;
+      //  console.log(ship);
+        //document.getElementById("ship").innerHTML = ship;
+        $(document).ready(function() {
+          $('#table2').dataTable( {
+            searching: false,
+            dom: 'Bfrtip',
+          buttons: [
+              'print', 'copy', 'csv', 'excel'
+          ],
+          paginate: false
+          } );
+        } );
+          var modal = document.getElementById('myModal2');
+
+          // Get the button that opens the modal
+          var btn = document.getElementById("btn");
+
+          // Get the <span> element that closes the modal
+          var span = document.getElementsByClassName("close")[0];
+
+          // When the user clicks the button, open the modal
+          btn.onclick = function() {
+              modal.style.display = "block";
+          }
+
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+              modal.style.display = "none";
+          }
+
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+                }
+              }
+      }
+        </script>
+
+  </body>
+</html>

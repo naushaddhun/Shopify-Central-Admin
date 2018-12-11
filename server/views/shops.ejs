@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      html, body { padding: 0; margin: 0; }
+      body {
+        font-family: "Trebuchet MS", "ProximaNovaLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #f2f7fa;
+      }
+      .topnav {
+        float: top;
+        overflow: inherit;
+        background-color: #333;
+      }
+
+      .topnav span {
+        float: left;
+        align-content: center;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: inherit;
+        font-size: 17px;
+      }
+      .topnav p {
+        float: center;
+        align-content: center;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: underline;
+        font-size: 30px;
+      }
+      h1 {
+        font-weight: 300;
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+      .subhead {
+        font-size: 17px;
+        line-height: 32px;
+        font-weight: 300;
+        color: #969A9C;
+      }
+      input {
+        width: 300px;
+        height: 50px;
+        padding: 10px;
+        border: 1px solid #479CCf;
+        color: #575757;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        border-radius: 4px 0 0 4px;
+        font-size: 18px;
+        float: left;
+      }
+      table{
+        border: 1;
+        cellpadding: 20px;
+        cellspacing: 20px;
+        background-color: inherit;
+        text-align: center;
+      }
+      #shop {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      #shop td, #shop th {
+          border: 1px solid #ddd;
+          padding: 8px;
+      }
+      #shop tr:nth-child(even){background-color: #f2f2f2;}
+      #shop tr:hover {background-color: #ddd;}
+      #shop th{
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #333;
+        color: white;
+      }
+      button {
+        color: #ffffff;
+        background-color: #333;
+        width: 100px;
+        height: 50px;
+        padding: 10px 20px 10px 20px;
+        box-sizing: border-box;
+        border: none;
+        text-shadow: 0 1px 0 #3188bc;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 4px 4px 4px 4px;
+      }
+      button:hover {
+        background-color: #479CCf;
+      }
+      form {
+        display: block;
+      }
+      .container {
+        text-align: center;
+        margin-top: 100px;
+        padding: 20px;
+        color: #333;
+      }
+      .container__form {
+        width: 400px;
+        margin: auto;
+      }
+       .container__form2 {
+        width: 400px;
+        margin: 100px auto;
+      }
+      .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+#dvTable {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+    </style>
+  </head>
+  <body>
+    <!-- <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div> -->
+    <div class="topnav">
+      <!-- <span style="font-size:30px;cursor:pointer;color:white" onclick="openNav()">&#9776;</span> -->
+      <p style="margin-top: 0px;margin-bottom: 0px;"> Central Admin </p>
+    </div>
+
+    <div class="container">
+      <header>
+        <h1>Your Shops</h1>
+      </header>
+      <center>
+      <div id="dvTable" style="overflow-x:auto;">
+
+      </div>
+    </center>
+      <script>
+      var shops =<%- JSON.stringify(shops)%>
+      console.log(JSON.stringify(shops));
+      var mytable =   '<table border = "1" cellspacing="0" id = "shop"><thead><th>Sr. No.</th><th>Shop Name</th><th>Controls</th></thead>'
+      for(var i=0; i<shops.length; i++){
+        mytable += '<tr>';
+        mytable += '<td>' + shops[i]['id'] + '</td>';
+        mytable += '<td>' + shops[i]['shop'] + '</td>';
+        mytable += '<td>'  + '<a href="https://a3d258fd.ngrok.io/home?shop=' + shops[i]['shop'] + '">' + '<button type="button" value="open">' + 'Open' + '</button>' + '</a>' + '</td>';
+        mytable += '</tr>';
+      }
+      mytable += '</table>';
+      document.getElementById("dvTable").innerHTML = mytable;
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+            document.body.style.backgroundColor = "rgba(0,0,0,1)";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft= "0";
+            document.body.style.backgroundColor = "white";
+        }
+        </script>
+    </div>
+  </body>
+</html>
